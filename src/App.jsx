@@ -7,16 +7,12 @@ import Skills from './pages/Skills';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 
-
-
-
-
 function App() {
   return (
     <Router>
-      <div className="app-container">
+      <div className="flex flex-col min-h-screen">
         <Navbar />
-        <main className="main-content">
+        <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />

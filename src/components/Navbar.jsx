@@ -15,44 +15,60 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="navbar">
-      <div className="nav-container">
-        <div className="nav-content">
-          <div className="nav-logo">
-            <Link to="/">KADALI SAI KISHORE</Link>
+    <nav className="fixed w-full bg-white shadow-md z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16">
+          <div className="flex items-center">
+            <Link to="/" className="text-2xl font-bold text-gray-800">KADALI SAI KISHORE</Link>
           </div>
 
-          <div className="nav-links">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className={location.pathname === item.path ? 'active' : ''}
+                className={`${
+                  location.pathname === item.path
+                    ? 'text-blue-600'
+                    : 'text-gray-600 hover:text-blue-600'
+                } transition-colors duration-200`}
               >
                 {item.label}
               </Link>
             ))}
           </div>
 
-          <div className="mobile-menu-button">
-            <button onClick={() => setIsOpen(!isOpen)}>
+          {/* Mobile Navigation Button */}
+          <div className="md:hidden flex items-center">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-gray-600 hover:text-gray-900"
+            >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
 
+        {/* Mobile Navigation Menu */}
         {isOpen && (
-          <div className="mobile-menu">
-            {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={location.pathname === item.path ? 'active' : ''}
-                onClick={() => setIsOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ))}
+          <div className="md:hidden">
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+              {navItems.map((item) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`${
+                    location.pathname === item.path
+                      ? 'bg-blue-50 text-blue-600'
+                      : 'text-gray-600 hover:bg-gray-50 hover:text-blue-600'
+                  } block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200`}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
           </div>
         )}
       </div>
